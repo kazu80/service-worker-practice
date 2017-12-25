@@ -37,6 +37,11 @@
       (window.location.protocol === 'https:' || isLocalhost)) {
     navigator.serviceWorker.register('service-worker.js')
     .then(function(registration) {
+
+        // original sw code
+        console.log ('ServiceWorker registration successful with scope: ', registration.scope);
+
+
       // updatefound is fired if service-worker.js changes.
       registration.onupdatefound = function() {
         // updatefound is also fired the very first time the SW is installed,
@@ -51,7 +56,10 @@
           installingWorker.onstatechange = function() {
             switch (installingWorker.state) {
               case 'installed':
-                // At this point, the old content will have been purged and the
+
+
+
+                  // At this point, the old content will have been purged and the
                 // fresh content will have been added to the cache.
                 // It's the perfect time to display a "New content is
                 // available; please refresh." message in the page's interface.
