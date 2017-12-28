@@ -39,7 +39,7 @@
             .then (function (registration) {
 
                 // original sw code
-                console.log ('ServiceWorker registration successful with scope: ', registration.scope);
+                // console.log ('ServiceWorker registration successful with scope: ', registration.scope);
 
                 // updatefound is fired if service-worker.js changes.
                 registration.onupdatefound = function () {
@@ -80,5 +80,11 @@
     }
 
     // Your custom JavaScript goes here
+    setTimeout (() => {
+        const img = new Image ();
+        img.src = 'images/dog.svg';
+        document.body.appendChild (img);
+    }, 3000);
+
 
 }) ();

@@ -8,7 +8,8 @@ const CACHE_NAME = 'my-site-cache-v1';
 const urlsToCache = [
     '/',
     '/styles/main.css',
-    '/scripts/main.js'
+    '/scripts/main.js',
+    '/images/cat.svg'
 ];
 
 // Observer install event
@@ -21,7 +22,21 @@ self.addEventListener ('install', (event) => {
     );
 });
 
+self.addEventListener ('activate', event => {
+    console.log ('V1 now ready to handle fetches!');
+});
+
 self.addEventListener ('fetch', (event) => {
+
+    const url = new URL (event.request.url);
+
+    // serve the cat SVG from the cache if the request is
+    // same-origin and the path is '/dog.svg'
+    if (url.origin == location.origin && url.pathname == '/images/dog.svg') {
+        event.respondWith (caches.match ('/images/cat.svg'));
+    }
+
+    /*
     event.respondWith (
         caches.match (event.requst)
             .then ((response) => {
@@ -51,4 +66,5 @@ self.addEventListener ('fetch', (event) => {
                 );
             })
     );
+    */
 });
